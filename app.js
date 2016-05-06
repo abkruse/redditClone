@@ -15,8 +15,36 @@ redditClone.controller('postController', ($scope) => {
             comment: "So true!"
           }
         ]
+      },
+      {
+        title: 'Alex Looks Different',
+        imageUrl: 'http://www.fillmurray.com/200/200',
+        description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+        votes: 4,
+        date: "Today at 9:55 PM",
+        comments: [
+          {
+            name: "Nicole",
+            comment: "Wow! She really does look different!"
+          }
+        ]
+      },
+      {
+        title: 'Wow!',
+        imageUrl: 'http://www.fillmurray.com/200/200',
+        description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+        votes: 2,
+        date: "Yesterday at 9:55 PM",
+        comments: [
+          {
+            name: "Alex",
+            comment: "Wow! Seriously!"
+          }
+        ]
       }
     ];
+
+    $scope.view.sorter = 'votes';
 
     $scope.showForm = () => {
       $scope.showingForm = !$scope.showingForm;
@@ -32,6 +60,14 @@ redditClone.controller('postController', ($scope) => {
 
     $scope.voteDown = (post) => {
       post.votes -= 1;
+    }
+
+    $scope.showComments = (post) => {
+      post.seeComments = !post.seeComments;
+    }
+
+    $scope.sortBy = (name) => {
+      $scope.view.sorter = name;
     }
 
     $scope.submitForm = () => {
@@ -58,7 +94,7 @@ redditClone.controller('postController', ($scope) => {
       post.comments.push(post.comment);
       post.showingCommentForm = !post.showingCommentForm;
       $scope.view.comment ='';
-      $scope.view.commentName ='';
+      $scope.view.name ='';
       $scope.commentForm.$setPristine();
     }
 });
