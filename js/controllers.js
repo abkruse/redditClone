@@ -1,6 +1,9 @@
-var redditClone = angular.module('redditClone', []);
+redditClone.controller('postController', ($scope, $http) => {
+    // $http.get('https://www.reddit.com/.json').then(function(result){
+    //   console.log(result);
+    //   $scope.redditPosts = result.data.data.children;
+    // });
 
-redditClone.controller('postController', ($scope) => {
     $scope.view = {};
     $scope.view.posts = [
       {
@@ -82,10 +85,14 @@ redditClone.controller('postController', ($scope) => {
       $scope.view.post.date = date;
 
       $scope.view.posts.push($scope.view.post);
+      $scope.view.title = '';
+      $scope.view.imageUrl = '';
+      $scope.view.description = '';
+      $scope.postForm.$setPristine();
       $scope.showingForm = !$scope.showingForm;
     }
 
-    $scope.submitComment = (isValid, post) => {
+    $scope.submitComment = (commentForm, post) => {
       post.comment = {};
 
       post.comment.name = $scope.view.name;
@@ -95,6 +102,6 @@ redditClone.controller('postController', ($scope) => {
       post.showingCommentForm = !post.showingCommentForm;
       $scope.view.comment ='';
       $scope.view.name ='';
-      $scope.commentForm.$setPristine();
+      commentForm.$setPristine();
     }
 });
